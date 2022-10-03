@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function qucikSort(arr) {
+				return quick(arr, 0, arr.length - 1);
+			}
+
+			function quick(arr, left, right) {
+
+				// 
+				let index = partition(arr, left, right);
+				if (arr.length > 1) {
+					if (index - 1 > left) {
+						quick(arr, left, index - 1);
+					}
+
+					if (index < right) {
+						quick(arr, index, right);
+					}
+				}
+				return arr;
+			}
+
+			function partition(arr, left, right) {
+				let i = left;
+				let j = right;
+
+				while (i <= j) {
+					let povit = arr[Math.floor((left + right) / 2)];
+					while (arr[i] < povit) {
+						i++;
+					}
+					while (arr[j] > povit) {
+						j--;
+					}
+
+					if (i <= j) {
+						swap(arr, i, j);
+						i++;
+						j--;
+					}
+				}
+
+				return i;
+			}
+
+			function swap(arr, i, j) {
+				let temp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = temp;
+			}
+
+			// console.log(qucikSort([2,5,6,3,4,1]));
+
+			// [] instanceof Array
+
+			/**
+			 * @param {Object} left 对象实例
+			 * @param {Object} right 被检测对象实例的构造函数
+			 */
+			function _instanceof(left, right) {
+				// 不检测字面量类型的基本值
+				if (typeof left == 'null' || typeof left !== 'object') {
+					return false;
+				}
+
+				let leftProto = left.__proto__;
+				let rightProto = right.prototype;
+				while (true) {
+					// 找到原型链终点还没找到 返回false
+					if (leftProto === null) {
+						return false;
+					}
+
+					// 找到了 返回true
+					if (leftProto === rightProto) {
+						return true;
+					}
+
+					// 沿着原型链前进
+					leftProto = leftProto.__proto__;
+				}
+			}
+
+			/**
+			 * 检测value是否为基本包装类对象
+			 * @param {Object} value 
+			 * 返回true 代表是基本包装类对象
+			 * 返回false 代表不是基本包装类对象
+			 */
+			function isPrimitiveObject(value) {
+				return !(value === Object(value));
+			}
+			
+			
+
+			function getUtils(){
+				let types = [
+					'Number',
+					'String',
+					'Array',
+					'Object',
+					'Null',
+					'Undefined'
+				]
+				
+				let typeUtils = {};
+				for (let type of types) {
+					typeUtils[`is${type}`] = checkType(type);
+				}
+				return typeUtils;
+			}
+			
+			function checkType(type){
+				return function(value){
+					return Object.prototype.toString.call(value).slice(8,-1) === type;
+				}
+			}
+			
+			let typeUtils = getUtils();
+			console.log(typeUtils.isNumber(true));
+			console.log(typeUtils.isString('demo'));
+		</script>
+	</body>
+</html>
