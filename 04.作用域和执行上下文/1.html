@@ -5,14 +5,17 @@
 		<title></title>
 	</head>
 	<body>
-		<script type="text/javascript">
-			const b = 200;
-		</script>
-		<script type="text/javascript">
-			let a = 100;
-			var c = 300;
-			function demo (){};
-			console.log([demo]);
+		<script>
+			var a = 100;
+			function fn(a){
+				console.log(a);
+				var a = 200;
+				function  a(){};
+			}
+			fn(a);
+			
+			
+			
 		</script>
 	</body>
 </html>
