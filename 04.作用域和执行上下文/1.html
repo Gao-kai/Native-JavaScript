@@ -6,14 +6,22 @@
 	</head>
 	<body>
 		<script>
-			var a = 100;
-			function fn(a){
-				console.log(a);
-				var a = 200;
-				function  a(){};
+			var i= 0;
+			function A(){
+				var i =10;
+				function x(){
+					console.log(i);
+				};
+				return x;
 			}
-			fn(a);
+			var y = A();
+			y(); //  ==>y()代表A函数执行的结果也就是x函数，在全局作用域中被调用
 			
+			function B(){
+				var i =20;
+				y();
+			}
+			B(); // ==> B()代表y(),也就等于函数x执行，此时x函数在B的作用域中被调用
 			
 			
 		</script>
