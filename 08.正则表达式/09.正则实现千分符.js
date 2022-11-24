@@ -110,5 +110,5 @@ console.log(reg.test('11windows98')); // // true
 
 // 反向否定预查 表示在匹配到windows之后，预测前面的字符必须不是98|8|10|11之一，否则匹配失败。
 var reg = /(?<!98|8|10|11)windows/;
-console.log(reg.test('11windows')); // true
-console.log(reg.test('11windows98')); // // true
+console.log(reg.test('11windows')); // false
+console.log(reg.test('11windows98')); // // false
